@@ -46,7 +46,7 @@ export const SideBySideModal: React.FC<SideBySideModalProps> = ({
         </div>
 
         {/* Comparison Table Content with sticky first column on mobile */}
-        <div className="overflow-x-auto p-2 sm:p-6 flex-1 -webkit-overflow-scrolling-touch">
+        <div className="w-full max-w-full overflow-x-auto p-2 sm:p-6 flex-1 -webkit-overflow-scrolling-touch">
           <table className="w-full text-xs text-left border-collapse">
             <thead>
               <tr>

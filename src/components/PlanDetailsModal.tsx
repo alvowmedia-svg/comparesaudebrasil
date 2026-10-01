@@ -173,7 +173,7 @@ export const PlanDetailsModal: React.FC<PlanDetailsModalProps> = ({
             </div>
 
             {/* Desktop Table (hidden sm:block) */}
-            <div className="hidden sm:block border border-slate-200 rounded-xl overflow-x-auto">
+            <div className="hidden sm:block border border-slate-200 rounded-xl w-full max-w-full overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold text-[11px]">
                   <tr>

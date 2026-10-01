@@ -2,17 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  overflow-x: hidden !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*, *::before, *::after {
+  box-sizing: border-box !important;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+html, body, #root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: clip !important;
+}
+
+img, svg, video, canvas {
+  max-width: 100% !important;
+  height: auto !important;
 }
 
 html {
