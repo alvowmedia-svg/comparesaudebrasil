@@ -23,12 +23,12 @@ import { Footer } from './components/Footer';
 import {
   SlidersHorizontal,
   ArrowUpDown,
+  Scale,
+  X,
+  Building2,
+  Building,
   Layers,
   Sparkles,
-  Scale,
-  CheckCircle,
-  Building2,
-  X,
 } from 'lucide-react';
 
 export default function App() {
@@ -165,7 +165,7 @@ export default function App() {
   };
 
   return (
-    <div className="w-full max-w-full overflow-x-clip overflow-y-auto min-h-screen relative bg-slate-50 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans w-full max-w-full overflow-x-hidden">
       {/* 3-Zone Clean Header */}
       <Header
         onStartQuote={() => scrollTo('simulador')}
@@ -180,7 +180,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-28 md:pb-8 space-y-8 sm:space-y-10 overflow-x-hidden min-w-0 box-border">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-10 pb-28 sm:pb-32 md:pb-12 space-y-8 sm:space-y-10 overflow-x-hidden">
         {/* Dynamic Location Precision Bar */}
         <LocationDetectorBar
           currentInput={quoteInput}
@@ -195,11 +195,11 @@ export default function App() {
         />
 
         {/* COMPARISON RESULTS SECTION */}
-        <section id="comparador" className="space-y-6 pt-4">
-          {/* Results Summary Bar */}
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4 min-w-0 w-full max-w-full box-border">
-            <div>
-              <div className="flex items-center gap-2 flex-wrap">
+        <section id="comparador" className="space-y-6 pt-4 w-full max-w-full overflow-hidden">
+          {/* Results Summary Bar - centered on mobile */}
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4 text-center lg:text-left">
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+              <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap">
                 <h2 className="text-lg sm:text-xl font-bold font-display text-slate-900">
                   Planos Disponíveis ({displayedQuotes.length} opções)
                 </h2>
@@ -208,7 +208,7 @@ export default function App() {
                   {quoteInput.state} ({quoteInput.beneficiaries.length} vidas)
                 </span>
               </div>
-              <p className="text-xs text-slate-500 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5 text-center lg:text-left">
                 Estimativas mensais calculadas considerando modalidade{' '}
                 <strong className="text-slate-800">
                   {quoteInput.contractType === 'empresarial'
@@ -221,10 +221,10 @@ export default function App() {
               </p>
             </div>
 
-            {/* Controls: Segmented Tier Filters & Sort - mobile scrollable */}
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2.5 w-full lg:w-auto">
+            {/* Controls: Segmented Tier Filters & Sort - mobile scrollable and centered */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-center lg:justify-end gap-2.5 w-full lg:w-auto">
               {/* Category Segmented Tabs */}
-              <div className="flex items-center p-1 bg-slate-100 rounded-xl text-xs font-medium overflow-x-auto no-scrollbar max-w-full">
+              <div className="flex items-center p-1 bg-slate-100 rounded-xl text-xs font-medium overflow-x-auto no-scrollbar max-w-full justify-start sm:justify-center">
                 <button
                   onClick={() => setTierFilter('all')}
                   className={`px-3 py-2 rounded-lg transition-colors whitespace-nowrap min-h-[38px] ${
@@ -267,13 +267,13 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Sort Dropdown */}
-              <div className="flex items-center gap-1.5 text-xs text-slate-600 w-full sm:w-auto">
+              {/* Sort Dropdown - centered on mobile */}
+              <div className="flex items-center justify-center gap-1.5 text-xs text-slate-600 w-full sm:w-auto">
                 <ArrowUpDown className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="w-full sm:w-auto px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 font-medium min-h-[40px]"
+                  className="w-full sm:w-auto px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 font-medium min-h-[40px] text-center sm:text-left"
                 >
                   <option value="price_asc">Menor Preço Mensal</option>
                   <option value="price_desc">Maior Preço Mensal</option>
@@ -315,7 +315,7 @@ export default function App() {
 
           {/* Grid of Calculated Plans */}
           {displayedQuotes.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0 w-full max-w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {displayedQuotes.map((quote) => (
                 <PlanCard
                   key={quote.planId}
@@ -372,78 +372,37 @@ export default function App() {
 
       {/* Floating Bottom Sticky Bar when plans are selected for comparison */}
       {selectedForComparison.length > 0 && (
-        <div className="fixed bottom-20 md:bottom-4 left-3 right-3 sm:left-4 sm:right-4 z-40 max-w-2xl mx-auto bg-slate-900 text-white p-2.5 sm:p-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-teal-600 flex items-center justify-center font-bold text-xs shrink-0">
-              <Scale className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
+        <div className="fixed bottom-[74px] md:bottom-4 left-3 right-3 sm:left-auto sm:right-auto sm:left-1/2 sm:-translate-x-1/2 z-40 w-auto sm:w-[500px] max-w-[calc(100vw-24px)] bg-slate-900 text-white p-3 sm:p-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center justify-between gap-2.5 animate-in fade-in slide-in-from-bottom-3 backdrop-blur-md">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+              <Scale className="w-4 h-4 text-white" />
             </div>
-            <div>
-              <div className="text-xs font-bold font-display leading-tight">
+            <div className="min-w-0">
+              <div className="text-xs font-bold font-display leading-tight truncate">
                 {selectedForComparison.length} {selectedForComparison.length === 1 ? 'plano' : 'planos'}
               </div>
-              <div className="text-[10px] text-slate-400 hidden sm:block">
+              <div className="text-[10px] text-slate-400 hidden sm:block truncate">
                 Selecione até 4 planos para comparar
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={() => setSelectedForComparison([])}
-              className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white transition-colors min-h-[36px]"
+              className="px-2 py-1.5 text-xs text-slate-400 hover:text-white transition-colors min-h-[36px]"
             >
               Limpar
             </button>
             <button
               onClick={() => setIsSideBySideModalOpen(true)}
-              className="px-3 sm:px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs rounded-xl transition-colors whitespace-nowrap shadow-sm flex items-center gap-1.5 min-h-[36px]"
+              className="px-3.5 sm:px-4 py-2 bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs rounded-xl transition-colors whitespace-nowrap shadow-sm flex items-center gap-1.5 min-h-[38px] active:scale-[0.98]"
             >
               <span>Comparar ({selectedForComparison.length})</span>
             </button>
           </div>
         </div>
       )}
-
-      {/* Mobile Fixed Bottom Navigation Bar */}
-      <nav
-        aria-label="Navegação rápida mobile"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-2 py-1 flex items-center justify-around h-16 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]"
-      >
-        <button
-          onClick={() => scrollTo('simulador')}
-          className="flex flex-col items-center justify-center flex-1 py-1 text-slate-600 hover:text-teal-700 active:scale-95 transition-all min-h-[48px]"
-        >
-          <SlidersHorizontal className="w-5 h-5 text-teal-600" />
-          <span className="text-[11px] font-medium mt-0.5">Simular</span>
-        </button>
-
-        <button
-          onClick={() => scrollTo('comparador')}
-          className="flex flex-col items-center justify-center flex-1 py-1 text-slate-600 hover:text-teal-700 active:scale-95 transition-all min-h-[48px]"
-        >
-          <Layers className="w-5 h-5 text-teal-600" />
-          <span className="text-[11px] font-medium mt-0.5">Planos</span>
-        </button>
-
-        <button
-          onClick={() => scrollTo('hospitais')}
-          className="flex flex-col items-center justify-center flex-1 py-1 text-slate-600 hover:text-teal-700 active:scale-95 transition-all min-h-[48px]"
-        >
-          <Building2 className="w-5 h-5 text-teal-600" />
-          <span className="text-[11px] font-medium mt-0.5">Hospitais</span>
-        </button>
-
-        <button
-          onClick={() => setIsAdvisorOpen(true)}
-          className="flex flex-col items-center justify-center flex-1 py-1 text-teal-800 hover:text-teal-900 active:scale-95 transition-all min-h-[48px]"
-        >
-          <div className="relative">
-            <Sparkles className="w-5 h-5 text-teal-600" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
-          </div>
-          <span className="text-[11px] font-semibold mt-0.5 text-teal-700">Consultor IA</span>
-        </button>
-      </nav>
 
       {/* Side-by-Side Comparison Modal */}
       <SideBySideModal
@@ -479,6 +438,44 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Mobile Fixed Bottom Navigation Bar (Thumb-Zone) */}
+      <nav
+        aria-label="Navegação rápida mobile"
+        className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200/90 shadow-lg md:hidden flex items-center justify-around px-2 py-1.5 h-16 pb-safe"
+      >
+        <button
+          onClick={() => scrollTo('simulador')}
+          className="flex-1 flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-teal-700 active:text-teal-800 transition-colors min-h-[44px] min-w-[44px] py-1"
+        >
+          <Building2 className="w-4 h-4 text-slate-500" />
+          <span className="text-[10px] font-semibold tracking-tight">Simulador</span>
+        </button>
+
+        <button
+          onClick={() => scrollTo('comparador')}
+          className="flex-1 flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-teal-700 active:text-teal-800 transition-colors min-h-[44px] min-w-[44px] py-1"
+        >
+          <Layers className="w-4 h-4 text-slate-500" />
+          <span className="text-[10px] font-semibold tracking-tight">Planos</span>
+        </button>
+
+        <button
+          onClick={() => scrollTo('hospitais')}
+          className="flex-1 flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-teal-700 active:text-teal-800 transition-colors min-h-[44px] min-w-[44px] py-1"
+        >
+          <Building className="w-4 h-4 text-slate-500" />
+          <span className="text-[10px] font-semibold tracking-tight">Hospitais</span>
+        </button>
+
+        <button
+          onClick={() => setIsAdvisorOpen(true)}
+          className="flex-1 flex flex-col items-center justify-center gap-1 text-teal-700 hover:text-teal-800 active:text-teal-900 transition-colors min-h-[44px] min-w-[44px] py-1"
+        >
+          <Sparkles className="w-4 h-4 text-teal-600" />
+          <span className="text-[10px] font-semibold tracking-tight">Consultor IA</span>
+        </button>
+      </nav>
     </div>
   );
 }

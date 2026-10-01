@@ -78,7 +78,7 @@ export const PlanDetailsModal: React.FC<PlanDetailsModalProps> = ({
                 onClose();
                 onRequestProposal(quote);
               }}
-              className="px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-lg transition-colors whitespace-nowrap shadow-sm text-center"
+              className="w-full sm:w-auto px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-xl transition-colors whitespace-nowrap shadow-sm text-center min-h-[44px] flex items-center justify-center active:scale-[0.98]"
             >
               Pedir Proposta Oficial
             </button>
@@ -173,7 +173,7 @@ export const PlanDetailsModal: React.FC<PlanDetailsModalProps> = ({
             </div>
 
             {/* Desktop Table (hidden sm:block) */}
-            <div className="hidden sm:block border border-slate-200 rounded-xl w-full max-w-full overflow-x-auto">
+            <div className="hidden sm:block border border-slate-200 rounded-xl overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold text-[11px]">
                   <tr>
@@ -233,7 +233,7 @@ export const PlanDetailsModal: React.FC<PlanDetailsModalProps> = ({
           </span>
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-100 transition-colors"
+            className="px-4 py-2 text-xs font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-100 transition-colors min-h-[44px] flex items-center justify-center"
           >
             Fechar Janela
           </button>

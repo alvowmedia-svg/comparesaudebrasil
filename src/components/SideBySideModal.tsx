@@ -46,7 +46,7 @@ export const SideBySideModal: React.FC<SideBySideModalProps> = ({
         </div>
 
         {/* Comparison Table Content with sticky first column on mobile */}
-        <div className="w-full max-w-full overflow-x-auto p-2 sm:p-6 flex-1 -webkit-overflow-scrolling-touch">
+        <div className="overflow-x-auto p-2 sm:p-6 flex-1 -webkit-overflow-scrolling-touch">
           <table className="w-full text-xs text-left border-collapse">
             <thead>
               <tr>
@@ -62,7 +62,7 @@ export const SideBySideModal: React.FC<SideBySideModalProps> = ({
                       <span className="text-[11px] text-slate-500">{plan.operatorName}</span>
                       <button
                         onClick={() => onRemovePlan(plan.planId)}
-                        className="text-[10px] text-rose-500 hover:underline p-1 min-h-[32px] flex items-center"
+                        className="text-[10px] text-rose-500 hover:underline p-1 min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-[0.95]"
                       >
                         Remover
                       </button>
@@ -73,7 +73,7 @@ export const SideBySideModal: React.FC<SideBySideModalProps> = ({
                       <span className="text-xs text-slate-400 font-normal"> /mês</span>
                     </div>
                     <div className="text-[10px] text-slate-400 font-mono">
-                      R$ {plan.priceRangeMin} ~ R$ {plan.priceRangeMax}
+                      R$ {plan.priceRangeMin.toLocaleString('pt-BR')} ~ R$ {plan.priceRangeMax.toLocaleString('pt-BR')}
                     </div>
                   </th>
                 ))}

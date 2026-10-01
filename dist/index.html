@@ -2,7 +2,33 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <script>
+      (function () {
+        try {
+          var targetScope = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : this);
+          var currentFetch = targetScope.fetch;
+          var descriptor = {
+            configurable: true,
+            enumerable: true,
+            get: function () {
+              return currentFetch;
+            },
+            set: function (fn) {
+              currentFetch = fn;
+            },
+          };
+          try {
+            Object.defineProperty(targetScope, 'fetch', descriptor);
+          } catch (e) {}
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              Object.defineProperty(Window.prototype, 'fetch', descriptor);
+            } catch (e) {}
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>ComparaSaúde Brasil – Comparador e Cotador de Planos de Saúde</title>
     <meta
       name="description"
@@ -21,7 +47,6 @@
       name="twitter:description"
       content="Compare e cote planos de saúde individuais e empresariais no Brasil com estimativas de mercado, tabelas oficiais ANS e análise de rede credenciada."
     />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d9488' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M22 12h-4l-3 9L9 3l-3 9H2'/></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,10 +68,11 @@
       }
     }
     </script>
-    <script type="module" crossorigin src="./assets/index-i0JDfviw.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BhyFg42Z.css">
+    <script type="module" crossorigin src="./assets/index-D_OztTI7.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BhnTeXzZ.css">
   </head>
-  <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-teal-500/20 selection:text-teal-900 overflow-x-hidden w-full max-w-full">
-    <div id="root" class="w-full max-w-full overflow-x-hidden min-w-0"></div>
+  <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-teal-500/20 selection:text-teal-900">
+    <div id="root"></div>
   </body>
 </html>
+

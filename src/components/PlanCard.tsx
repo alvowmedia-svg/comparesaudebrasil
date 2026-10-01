@@ -32,7 +32,7 @@ export const PlanCard: React.FC<PlanCardProps> = ({
 
   return (
     <div
-      className={`rounded-2xl border transition-all duration-200 bg-white overflow-hidden flex flex-col justify-between w-full max-w-full box-border min-w-0 ${
+      className={`rounded-2xl border transition-all duration-200 bg-white overflow-hidden flex flex-col justify-between ${
         isSelectedForComparison
           ? 'border-teal-600 ring-2 ring-teal-500/20 shadow-md'
           : 'border-slate-200 hover:border-slate-300 shadow-sm'
@@ -195,18 +195,18 @@ export const PlanCard: React.FC<PlanCardProps> = ({
         </div>
       </div>
 
-      {/* Card Actions */}
-      <div className="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-100 flex flex-col xs:flex-row items-stretch xs:items-center justify-between gap-2">
+      {/* Card Actions - centered and balanced on mobile */}
+      <div className="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-center gap-2 w-full">
         <button
           onClick={() => onViewDetails(quote)}
-          className="w-full xs:w-auto px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-200/60 rounded-xl transition-colors min-h-[44px] flex items-center justify-center border border-slate-200/70"
+          className="w-full sm:flex-1 px-3.5 py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-200/60 rounded-xl transition-colors min-h-[44px] flex items-center justify-center border border-slate-200/70 active:scale-[0.98]"
         >
           Carências & Regras
         </button>
 
         <button
           onClick={() => onRequestProposal(quote)}
-          className="w-full xs:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors whitespace-nowrap shadow-xs min-h-[44px] active:scale-[0.99]"
+          className="w-full sm:flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors whitespace-nowrap shadow-xs min-h-[44px] active:scale-[0.98]"
         >
           <span>Receber Proposta</span>
           <ArrowRight className="w-3.5 h-3.5" />

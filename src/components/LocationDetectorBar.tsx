@@ -112,97 +112,101 @@ export const LocationDetectorBar: React.FC<LocationDetectorBarProps> = ({
   const currentStateObj = BRAZILIAN_STATES.find((s) => s.uf === currentInput.state);
 
   return (
-    <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-900 text-white rounded-2xl p-4 sm:p-5 border border-teal-800/60 shadow-md w-full max-w-full box-border min-w-0 mx-auto md:max-w-none">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-5">
-        {/* Left: Current Active Location */}
-        <div className="space-y-1">
-          <div className="flex items-center gap-2 text-xs font-semibold text-teal-300">
+    <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-900 text-white rounded-2xl p-3.5 sm:p-5 border border-teal-800/60 shadow-md w-full max-w-full overflow-hidden">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        {/* Left: Current Active Location - centered on mobile & tablet */}
+        <div className="space-y-1.5 flex flex-col items-center lg:items-start text-center lg:text-left w-full lg:w-auto">
+          <div className="flex items-center justify-center lg:justify-start gap-2 text-xs font-semibold text-teal-300">
             <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse shrink-0" />
-            <span className="truncate">Localização Ativa para Precisão de Rede & Preços</span>
+            <span className="text-[11px] sm:text-xs">Localização Ativa para Precisão de Rede & Preços</span>
           </div>
 
-          <div className="flex items-baseline gap-1.5 sm:gap-2 flex-wrap">
-            <h3 className="text-lg sm:text-2xl font-bold font-display text-white flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center justify-center lg:justify-start gap-2 flex-wrap max-w-full">
+            <h3 className="text-base sm:text-xl md:text-2xl font-bold font-display text-white flex items-center justify-center lg:justify-start gap-1.5 sm:gap-2 flex-wrap text-center lg:text-left break-words">
               <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-teal-400 shrink-0" />
               <span>
                 {currentInput.city}, {currentInput.state}
               </span>
+              <span className="text-xs text-slate-300 font-normal">
+                ({currentStateObj ? currentStateObj.name : 'Brasil'})
+              </span>
             </h3>
-            <span className="text-xs text-slate-300">
-              ({currentStateObj ? currentStateObj.name : 'Brasil'})
-            </span>
 
             {/* Detection method badge */}
-            <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-700/60">
+            <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded bg-teal-950/80 text-teal-300 border border-teal-700/60 inline-flex items-center">
               {currentInput.detectedLocation?.method === 'gps'
-                ? 'GPS'
+                ? 'Sinal de GPS'
                 : currentInput.detectedLocation?.method === 'cep'
                 ? `CEP ${currentInput.detectedLocation.cep}`
                 : currentInput.detectedLocation?.method === 'ip'
-                ? 'IP'
-                : 'Manual'}
+                ? 'Detecção por IP'
+                : 'Seleção Regional'}
             </span>
           </div>
 
-          <p className="text-xs text-slate-400 max-w-xl">
+          <p className="text-[11px] sm:text-xs text-slate-400 max-w-xl text-center lg:text-left">
             Tabelas e rede credenciada ajustadas para{' '}
             <strong className="text-slate-200">{currentInput.city}</strong> e região.
           </p>
         </div>
 
-        {/* Right: GPS, CEP and Manual Actions - Full Width Grid on Mobile */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 w-full md:w-auto">
-          {/* 1-Click GPS button */}
-          <button
-            onClick={handleDetectGps}
-            disabled={isDetectingGps}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-teal-600 hover:bg-teal-500 disabled:opacity-60 text-white text-xs font-semibold rounded-xl transition-all shadow-xs whitespace-nowrap min-h-[44px] active:scale-[0.99]"
-            title="Usar localização do dispositivo (GPS)"
-          >
-            {isDetectingGps ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Localizando via GPS...</span>
-              </>
-            ) : (
-              <>
-                <Crosshair className="w-4 h-4 text-teal-200" />
-                <span>Identificar Meu Local (GPS)</span>
-              </>
-            )}
-          </button>
+        {/* Right: GPS, CEP and Manual Actions - centered on mobile & tablet */}
+        <div className="flex flex-col items-center justify-center lg:items-end gap-2.5 w-full lg:w-auto max-w-sm mx-auto lg:max-w-none lg:mx-0">
+          {/* CEP Input Form - centered */}
+          <form onSubmit={handleLookupCep} className="flex items-center justify-center gap-2 w-full">
+            <input
+              type="text"
+              value={cepInput}
+              onChange={(e) => handleCepInputChange(e.target.value)}
+              placeholder="Digite seu CEP (ex: 01310-100)"
+              maxLength={9}
+              className="w-full flex-1 px-3 py-2 bg-slate-800/90 border border-slate-700 rounded-xl text-xs text-white placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono h-10 text-center min-w-0"
+            />
+            <button
+              type="submit"
+              disabled={isSearchingCep}
+              className="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl border border-slate-700 transition-colors h-10 flex items-center justify-center gap-1 shrink-0 active:scale-[0.97] text-xs font-semibold"
+              title="Buscar CEP"
+            >
+              {isSearchingCep ? (
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-teal-400" />
+              ) : (
+                <>
+                  <Search className="w-3.5 h-3.5" />
+                  <span>Buscar</span>
+                </>
+              )}
+            </button>
+          </form>
 
-          {/* CEP Input Form & Button */}
-          <div className="flex items-center gap-1.5 w-full sm:w-auto">
-            <form onSubmit={handleLookupCep} className="flex-1 sm:flex-initial flex items-center gap-1.5 min-w-0">
-              <input
-                type="text"
-                value={cepInput}
-                onChange={(e) => handleCepInputChange(e.target.value)}
-                placeholder="Digitar CEP"
-                maxLength={9}
-                className="w-full sm:w-40 px-3 py-2.5 bg-slate-800/90 border border-slate-700 rounded-xl text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono min-h-[44px]"
-              />
-              <button
-                type="submit"
-                disabled={isSearchingCep}
-                className="p-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-xl border border-slate-700 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 active:scale-[0.97]"
-                title="Buscar CEP"
-              >
-                {isSearchingCep ? (
-                  <Loader2 className="w-4 h-4 animate-spin text-teal-400" />
-                ) : (
-                  <Search className="w-4 h-4" />
-                )}
-              </button>
-            </form>
+          {/* Action buttons: 2 columns grid centered */}
+          <div className="grid grid-cols-2 gap-2 w-full">
+            {/* 1-Click GPS button */}
+            <button
+              onClick={handleDetectGps}
+              disabled={isDetectingGps}
+              className="h-10 px-3 bg-teal-600 hover:bg-teal-500 disabled:opacity-60 text-white text-xs font-semibold rounded-xl transition-all shadow-xs whitespace-nowrap flex items-center justify-center gap-1.5 active:scale-[0.98] w-full"
+              title="Usar localização do dispositivo (GPS)"
+            >
+              {isDetectingGps ? (
+                <>
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  <span>Localizando...</span>
+                </>
+              ) : (
+                <>
+                  <Crosshair className="w-3.5 h-3.5 text-teal-200" />
+                  <span>Localizar GPS</span>
+                </>
+              )}
+            </button>
 
-            {/* Toggle manual selector */}
+            {/* Mudar Estado Button */}
             <button
               onClick={() => setIsManualExpanded(!isManualExpanded)}
-              className="px-3 py-2.5 bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-medium rounded-xl border border-slate-700 transition-colors whitespace-nowrap min-h-[44px] shrink-0"
+              className="h-10 px-3 bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white text-xs font-semibold rounded-xl border border-slate-700 transition-colors whitespace-nowrap flex items-center justify-center active:scale-[0.98] w-full"
             >
-              {isManualExpanded ? 'Ocultar' : 'Mudar UF'}
+              {isManualExpanded ? 'Fechar UFs' : 'Mudar UF (27)'}
             </button>
           </div>
         </div>
@@ -228,11 +232,14 @@ export const LocationDetectorBar: React.FC<LocationDetectorBarProps> = ({
 
       {/* Quick State Picker Tray when expanded */}
       {isManualExpanded && (
-        <div className="mt-3 pt-3 border-t border-slate-800 space-y-2">
-          <span className="text-[11px] text-slate-400 block font-medium">
-            Selecione o seu Estado para calibrar a cotação regional:
-          </span>
-          <div className="flex flex-wrap justify-center sm:justify-start gap-1.5 text-xs max-h-52 overflow-y-auto p-1">
+        <div className="mt-3.5 pt-3.5 border-t border-slate-800 space-y-2">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] text-slate-300 block font-semibold">
+              Selecione seu Estado para calibrar a cotação regional:
+            </span>
+            <span className="text-[10px] text-teal-400">27 UFs</span>
+          </div>
+          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-9 gap-1.5 text-xs max-h-52 overflow-y-auto p-1">
             {BRAZILIAN_STATES.map((st) => (
               <button
                 key={st.uf}
@@ -246,11 +253,12 @@ export const LocationDetectorBar: React.FC<LocationDetectorBarProps> = ({
                   });
                   setIsManualExpanded(false);
                 }}
-                className={`px-2 py-2 rounded-lg transition-colors border text-xs min-h-[40px] flex items-center justify-center font-medium ${
+                className={`px-2 py-2 rounded-xl transition-colors border text-xs min-h-[40px] flex items-center justify-center font-bold ${
                   currentInput.state === st.uf
-                    ? 'bg-teal-600 text-white border-teal-500 font-semibold'
-                    : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                    ? 'bg-teal-600 text-white border-teal-500 shadow-xs'
+                    : 'bg-slate-800/90 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
                 }`}
+                title={st.name}
               >
                 {st.uf}
               </button>

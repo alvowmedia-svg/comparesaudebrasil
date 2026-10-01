@@ -37,11 +37,11 @@ export const HospitalNetworkExplorer: React.FC<HospitalNetworkExplorerProps> = (
   });
 
   return (
-    <section id="hospitais" className="py-16 bg-slate-50 border-t border-slate-200 w-full max-w-full box-border min-w-0 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 w-full max-w-full min-w-0 box-border">
+    <section id="hospitais" className="py-16 bg-slate-50 border-t border-slate-200 w-full max-w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Section Header */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 text-center lg:text-left items-center lg:items-end">
+          <div className="space-y-2 max-w-2xl flex flex-col items-center lg:items-start">
             <div className="text-xs font-semibold text-teal-700 uppercase tracking-wider">
               Mapeamento de Rede Credenciada
             </div>
@@ -55,7 +55,7 @@ export const HospitalNetworkExplorer: React.FC<HospitalNetworkExplorerProps> = (
           </div>
 
           {/* Quick Filters */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-end gap-2.5 w-full lg:w-auto max-w-md mx-auto lg:max-w-none lg:mx-0">
             <div className="relative flex-1 sm:w-72">
               <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3 sm:top-2.5" />
               <input
@@ -89,25 +89,25 @@ export const HospitalNetworkExplorer: React.FC<HospitalNetworkExplorerProps> = (
 
         {/* Featured Hospital Showcase Banner */}
         <div className="rounded-2xl overflow-hidden border border-slate-200 bg-white grid grid-cols-1 lg:grid-cols-12 shadow-sm">
-          <div className="lg:col-span-5 relative h-56 lg:h-auto">
+          <div className="lg:col-span-5 relative h-56 sm:h-72 lg:h-auto min-h-[220px]">
             <img
               src={hospitalImage}
               alt="Fachada moderna de centro hospitalar de excelência"
               referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent lg:hidden" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent lg:hidden pointer-events-none" />
           </div>
 
-          <div className="lg:col-span-7 p-6 sm:p-8 flex flex-col justify-between space-y-4">
+          <div className="lg:col-span-7 p-5 sm:p-8 flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <span className="text-xs font-semibold text-teal-700 uppercase tracking-wide">
                 Padrão Triple A & Hospitais Top do Brasil
               </span>
-              <h3 className="text-xl font-bold font-display text-slate-900">
+              <h3 className="text-xl font-bold font-display text-slate-900 text-balance">
                 Acesso aos melhores centros hospitalares da América Latina
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed text-pretty">
                 Hospitais como <strong>Israelita Albert Einstein</strong>, <strong>Sírio-Libanês</strong>,{' '}
                 <strong>Oswaldo Cruz</strong> e <strong>Copa Star</strong> exigem linhas de categoria
                 Executiva ou Premium (como Bradesco Top Nacional, Amil One S2500, SulAmérica Especial 100).

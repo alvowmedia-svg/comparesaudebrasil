@@ -210,21 +210,21 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
   };
 
   return (
-    <div id="simulador" className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden w-full max-w-full box-border min-w-0">
+    <div id="simulador" className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
       {/* Header bar of wizard */}
       <div className="p-3.5 sm:p-6 border-b border-slate-100 bg-slate-50/50">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
-          <div className="flex flex-col min-w-0 w-full max-w-full">
+          <div>
             <h2 className="text-lg sm:text-xl font-bold font-display text-slate-900">
               Configurador Condicional de Cotação
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-0.5 break-words">
+            <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
               Personalize a modalidade, as vidas e a cobertura para calcular a estimativa média de mercado.
             </p>
           </div>
 
-          {/* Quick presets buttons - smooth horizontal touch scroll on mobile */}
-          <div className="flex flex-wrap items-center gap-2 py-1 -mx-1 px-1 w-full max-w-full min-w-0">
+          {/* Quick presets buttons - smooth horizontal touch scroll on mobile without overflow */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 w-full max-w-full">
             <span className="text-slate-400 font-medium text-[11px] whitespace-nowrap shrink-0">Exemplos:</span>
             <button
               onClick={() => loadPreset('jovem')}
@@ -254,10 +254,10 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
         </div>
 
         {/* Wizard navigation segmented tabs */}
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1 mt-4 sm:mt-6 p-1 bg-slate-200/70 rounded-xl text-xs font-semibold w-full max-w-full min-w-0">
+        <div className="flex items-center gap-1 mt-4 sm:mt-6 p-1 bg-slate-200/70 rounded-xl overflow-x-auto text-xs font-semibold no-scrollbar w-full max-w-full">
           <button
             onClick={() => setActiveTab('profile')}
-            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] flex-1 sm:flex-initial ${
+            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] ${
               activeTab === 'profile'
                 ? 'bg-white text-slate-900 shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
@@ -269,7 +269,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
           </button>
           <button
             onClick={() => setActiveTab('beneficiaries')}
-            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] flex-1 sm:flex-initial ${
+            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] ${
               activeTab === 'beneficiaries'
                 ? 'bg-white text-slate-900 shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
@@ -281,7 +281,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
           </button>
           <button
             onClick={() => setActiveTab('coverage')}
-            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] flex-1 sm:flex-initial ${
+            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] ${
               activeTab === 'coverage'
                 ? 'bg-white text-slate-900 shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
@@ -293,7 +293,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
           </button>
           <button
             onClick={() => setActiveTab('filters')}
-            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] flex-1 sm:flex-initial ${
+            className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] ${
               activeTab === 'filters'
                 ? 'bg-white text-slate-900 shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
@@ -312,82 +312,133 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
         {activeTab === 'profile' && (
           <div className="space-y-6">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2 text-center sm:text-left">
                 Modalidade de Contratação
               </label>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-3">
                 {/* Empresarial / MEI */}
                 <div
                   onClick={() => updateField('contractType', 'empresarial')}
-                  className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${
+                  className={`cursor-pointer p-3 sm:p-3.5 rounded-xl border-2 transition-all flex flex-col justify-between active:scale-[0.99] ${
                     currentInput.contractType === 'empresarial'
-                      ? 'border-teal-600 bg-teal-50/40 text-teal-950'
-                      : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                      ? 'border-teal-600 bg-teal-50/50 text-teal-950 shadow-xs'
+                      : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-white'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-bold text-sm flex items-center gap-2">
-                      <Building2 className="w-4 h-4 text-teal-600" />
-                      Empresarial / MEI (CNPJ)
-                    </span>
-                    <span className="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">
-                      Até 35% OFF
-                    </span>
+                  <div>
+                    <div className="flex items-center justify-between gap-1.5 mb-1.5">
+                      <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-xs sm:text-sm text-slate-900 min-w-0">
+                        <span
+                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                            currentInput.contractType === 'empresarial'
+                              ? 'border-teal-600 bg-teal-600'
+                              : 'border-slate-300'
+                          }`}
+                        >
+                          {currentInput.contractType === 'empresarial' && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                          )}
+                        </span>
+                        <Building2 className="w-4 h-4 text-teal-600 shrink-0" />
+                        <span className="truncate">Empresarial / MEI</span>
+                      </div>
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded shrink-0">
+                        -35% OFF
+                      </span>
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-500 leading-snug">
+                      Válido para MEI, Eireli, LTDA a partir de 1 ou 2 vidas (titular + dependente).
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Válido para MEI, Eireli, LTDA ou grandes empresas a partir de 1 ou 2 vidas (titular + dependente).
-                  </p>
+                  <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center text-[10px] text-teal-700 font-semibold">
+                    CNPJ Ativo
+                  </div>
                 </div>
 
                 {/* Individual / Familiar */}
                 <div
                   onClick={() => updateField('contractType', 'individual')}
-                  className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${
+                  className={`cursor-pointer p-3 sm:p-3.5 rounded-xl border-2 transition-all flex flex-col justify-between active:scale-[0.99] ${
                     currentInput.contractType === 'individual'
-                      ? 'border-teal-600 bg-teal-50/40 text-teal-950'
-                      : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                      ? 'border-teal-600 bg-teal-50/50 text-teal-950 shadow-xs'
+                      : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-white'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-bold text-sm flex items-center gap-2">
-                      <User className="w-4 h-4 text-teal-600" />
-                      Individual / Familiar (CPF)
-                    </span>
+                  <div>
+                    <div className="flex items-center justify-between gap-1.5 mb-1.5">
+                      <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-xs sm:text-sm text-slate-900 min-w-0">
+                        <span
+                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                            currentInput.contractType === 'individual'
+                              ? 'border-teal-600 bg-teal-600'
+                              : 'border-slate-300'
+                          }`}
+                        >
+                          {currentInput.contractType === 'individual' && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                          )}
+                        </span>
+                        <User className="w-4 h-4 text-teal-600 shrink-0" />
+                        <span className="truncate">Individual / Familiar</span>
+                      </div>
+                      <span className="text-[10px] font-semibold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded shrink-0">
+                        ANS PF
+                      </span>
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-500 leading-snug">
+                      Pessoa física com reajuste anual direto pela ANS. Sem exigência de CNPJ.
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Pessoa física com reajuste anual controlado diretamente pela ANS. Sem necessidade de vínculo ou empresa.
-                  </p>
+                  <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center text-[10px] text-slate-600 font-semibold">
+                    CPF Direto
+                  </div>
                 </div>
 
                 {/* Coletivo por Adesão */}
                 <div
                   onClick={() => updateField('contractType', 'adesao')}
-                  className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${
+                  className={`cursor-pointer p-3 sm:p-3.5 rounded-xl border-2 transition-all flex flex-col justify-between active:scale-[0.99] ${
                     currentInput.contractType === 'adesao'
-                      ? 'border-teal-600 bg-teal-50/40 text-teal-950'
-                      : 'border-slate-200 hover:border-slate-300 text-slate-700'
+                      ? 'border-teal-600 bg-teal-50/50 text-teal-950 shadow-xs'
+                      : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-white'
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-bold text-sm flex items-center gap-2">
-                      <Users className="w-4 h-4 text-teal-600" />
-                      Coletivo por Adesão
-                    </span>
-                    <span className="text-[11px] font-medium text-slate-600 bg-slate-100 px-2 py-0.5 rounded">
-                      ~18% OFF
-                    </span>
+                  <div>
+                    <div className="flex items-center justify-between gap-1.5 mb-1.5">
+                      <div className="flex items-center gap-1.5 sm:gap-2 font-bold text-xs sm:text-sm text-slate-900 min-w-0">
+                        <span
+                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                            currentInput.contractType === 'adesao'
+                              ? 'border-teal-600 bg-teal-600'
+                              : 'border-slate-300'
+                          }`}
+                        >
+                          {currentInput.contractType === 'adesao' && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                          )}
+                        </span>
+                        <Users className="w-4 h-4 text-teal-600 shrink-0" />
+                        <span className="truncate">Coletivo Adesão</span>
+                      </div>
+                      <span className="text-[10px] font-bold text-teal-700 bg-teal-100 px-1.5 py-0.5 rounded shrink-0">
+                        -18% OFF
+                      </span>
+                    </div>
+                    <p className="text-[11px] sm:text-xs text-slate-500 leading-snug">
+                      Para profissionais vinculados a sindicatos, conselhos (CRM, OAB, CREA) ou estudantes.
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-500 leading-relaxed">
-                    Para profissionais liberais vinculados a sindicatos ou conselhos (OAB, CREA, CRM, estudantes UNE, etc.).
-                  </p>
+                  <div className="mt-2 pt-1.5 border-t border-slate-100 flex items-center text-[10px] text-slate-600 font-semibold">
+                    Entidades de Classe
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Location selector with CEP & GPS precision */}
-            <div className="pt-5 border-t border-slate-100 space-y-4">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div>
+            {/* Location selector with CEP & GPS precision - centered on mobile */}
+            <div className="pt-4 border-t border-slate-100 space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-center sm:text-left">
+                <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                   <label className="block text-xs font-semibold text-slate-800 uppercase tracking-wider">
                     Identificação de Localização & CEP
                   </label>
@@ -396,12 +447,12 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                   </p>
                 </div>
 
-                {/* Instant GPS button */}
+                {/* Instant GPS button - centered on mobile */}
                 <button
                   type="button"
                   onClick={handleGpsDetect}
                   disabled={isDetectingGps}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-semibold rounded-lg transition-colors border border-teal-200 shrink-0 self-start sm:self-auto"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-teal-50 hover:bg-teal-100 text-teal-800 text-xs font-semibold rounded-xl transition-colors border border-teal-200 shrink-0 mx-auto sm:mx-0 h-10 active:scale-[0.98] w-full sm:w-auto max-w-xs"
                 >
                   {isDetectingGps ? (
                     <>
@@ -411,39 +462,39 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                   ) : (
                     <>
                       <Crosshair className="w-3.5 h-3.5 text-teal-600" />
-                      <span>Detectar Minha Localização (GPS)</span>
+                      <span>Detectar GPS Automático</span>
                     </>
                   )}
                 </button>
               </div>
 
               {locationMessage && (
-                <div className="p-2.5 rounded-lg bg-teal-50 border border-teal-200 text-xs text-teal-900 flex items-center gap-2">
+                <div className="p-2.5 rounded-lg bg-teal-50 border border-teal-200 text-xs text-teal-900 flex items-center justify-center sm:justify-start gap-2 text-center sm:text-left">
                   <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0" />
                   <span>{locationMessage}</span>
                 </div>
               )}
 
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
-                {/* CEP input */}
-                <div className="sm:col-span-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-full">
+                {/* CEP input - centered on mobile */}
+                <div className="flex flex-col items-center sm:items-stretch text-center sm:text-left w-full">
                   <label className="text-[10px] font-semibold text-slate-500 uppercase block mb-1">
                     Buscar por CEP
                   </label>
-                  <div className="relative">
+                  <div className="relative w-full max-w-xs sm:max-w-none">
                     <input
                       type="text"
                       value={cepField}
                       onChange={handleCepChange}
                       placeholder="00000-000"
                       maxLength={9}
-                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 h-10 pr-9 text-center sm:text-left"
                     />
                     <button
                       type="button"
                       onClick={() => handleCepSearch()}
                       disabled={isSearchingCep}
-                      className="absolute right-2 top-2 text-slate-400 hover:text-teal-700"
+                      className="absolute right-2 top-2.5 text-slate-400 hover:text-teal-700 min-h-[30px] min-w-[30px] flex items-center justify-center"
                       title="Localizar CEP"
                     >
                       {isSearchingCep ? (
@@ -453,22 +504,22 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                       )}
                     </button>
                   </div>
-                  <span className="text-[10px] text-slate-400 mt-0.5 block">
-                    Preenche cidade e estado automaticamente
+                  <span className="text-[10px] text-slate-400 mt-1 block">
+                    Preenche cidade e UF
                   </span>
                 </div>
 
-                {/* State selector */}
-                <div className="sm:col-span-4">
+                {/* State selector - centered on mobile */}
+                <div className="flex flex-col items-center sm:items-stretch text-center sm:text-left w-full">
                   <label className="text-[10px] font-semibold text-slate-500 uppercase block mb-1">
                     Estado (UF)
                   </label>
-                  <div className="relative">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
+                  <div className="relative w-full max-w-xs sm:max-w-none">
+                    <MapPin className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-3" />
                     <select
                       value={currentInput.state}
                       onChange={(e) => updateField('state', e.target.value)}
-                      className="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-medium text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                      className="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 h-10 text-center sm:text-left"
                     >
                       {BRAZILIAN_STATES.map((st) => (
                         <option key={st.uf} value={st.uf}>
@@ -477,29 +528,37 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                       ))}
                     </select>
                   </div>
+                  <span className="text-[10px] text-slate-400 mt-1 block">
+                    Regional oficial ANS
+                  </span>
                 </div>
 
-                {/* City input */}
-                <div className="sm:col-span-4">
+                {/* City input - centered on mobile */}
+                <div className="flex flex-col items-center sm:items-stretch text-center sm:text-left w-full">
                   <label className="text-[10px] font-semibold text-slate-500 uppercase block mb-1">
                     Cidade
                   </label>
-                  <input
-                    type="text"
-                    value={currentInput.city}
-                    onChange={(e) => updateField('city', e.target.value)}
-                    placeholder="Ex: São Paulo, Rio de Janeiro..."
-                    className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 min-h-[40px]"
-                  />
+                  <div className="w-full max-w-xs sm:max-w-none">
+                    <input
+                      type="text"
+                      value={currentInput.city}
+                      onChange={(e) => updateField('city', e.target.value)}
+                      placeholder="Ex: São Paulo"
+                      className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 h-10 text-center sm:text-left"
+                    />
+                  </div>
+                  <span className="text-[10px] text-slate-400 mt-1 block">
+                    Município da contratação
+                  </span>
                 </div>
               </div>
 
-              {/* Step Navigation to Next Tab */}
-              <div className="pt-2 flex justify-end">
+              {/* Step Navigation to Next Tab - centered on mobile */}
+              <div className="pt-2 flex justify-center sm:justify-end">
                 <button
                   type="button"
                   onClick={() => setActiveTab('beneficiaries')}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors min-h-[44px]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors h-10 active:scale-[0.98]"
                 >
                   <span>Avançar para Vidas & Idades ({currentInput.beneficiaries.length})</span>
                   <ArrowRight className="w-4 h-4" />
@@ -512,8 +571,8 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
         {/* TAB 2: Beneficiaries & Ages */}
         {activeTab === 'beneficiaries' && (
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+              <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <h3 className="text-sm font-bold text-slate-900">
                   Beneficiários do Plano ({currentInput.beneficiaries.length} vidas)
                 </h3>
@@ -523,7 +582,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
               </div>
               <button
                 onClick={handleAddBeneficiary}
-                className="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors border border-teal-200"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold text-teal-700 bg-teal-50 hover:bg-teal-100 rounded-xl transition-colors border border-teal-200 min-h-[40px] w-full sm:w-auto"
               >
                 <Plus className="w-3.5 h-3.5" />
                 <span>Adicionar Dependente</span>
@@ -556,15 +615,15 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                           type="button"
                           onClick={() => handleRemoveBeneficiary(b.id)}
                           title="Remover beneficiário"
-                          className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg transition-colors min-h-[32px] min-w-[32px] flex items-center justify-center"
+                          className="p-2 text-slate-400 hover:text-rose-600 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center active:scale-[0.95]"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       )}
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-center">
-                      <div className="sm:col-span-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-2.5 items-center">
+                      <div className="md:col-span-4">
                         <label className="text-[10px] font-semibold text-slate-500 uppercase block mb-1">
                           Nome / Identificação
                         </label>
@@ -575,11 +634,11 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                             handleUpdateBeneficiary(b.id, { name: e.target.value })
                           }
                           placeholder="Ex: Titular, Esposa..."
-                          className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 h-10 min-h-[42px]"
                         />
                       </div>
 
-                      <div className="sm:col-span-3">
+                      <div className="md:col-span-3">
                         <label className="text-[10px] font-semibold text-slate-500 uppercase block mb-1">
                           Parentesco
                         </label>
@@ -590,7 +649,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                               relationship: e.target.value as any,
                             })
                           }
-                          className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500"
+                          className="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 h-10 min-h-[42px]"
                         >
                           <option value="titular">Titular</option>
                           <option value="conjuge">Cônjuge / Parceiro(a)</option>
@@ -600,11 +659,11 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                         </select>
                       </div>
 
-                      <div className="sm:col-span-3">
+                      <div className="md:col-span-3">
                         <label className="text-[10px] font-semibold text-slate-500 uppercase block mb-1">
                           Idade (anos)
                         </label>
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-1.5">
                           <button
                             type="button"
                             onClick={() =>
@@ -612,7 +671,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                                 age: Math.max(0, b.age - 1),
                               })
                             }
-                            className="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 flex items-center justify-center font-bold text-sm shrink-0 transition-colors"
+                            className="w-10 h-10 min-h-[44px] min-w-[44px] rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 flex items-center justify-center font-bold text-sm shrink-0 transition-colors"
                             aria-label="Diminuir idade"
                           >
                             <Minus className="w-3.5 h-3.5" />
@@ -627,7 +686,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                                 age: parseInt(e.target.value, 10) || 0,
                               })
                             }
-                            className="w-full px-2 py-2 bg-white border border-slate-200 rounded-lg text-xs font-mono font-semibold text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 text-center min-h-[36px]"
+                            className="w-full px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-mono font-semibold text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 text-center h-10 min-h-[42px]"
                           />
                           <button
                             type="button"
@@ -636,7 +695,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                                 age: Math.min(110, b.age + 1),
                               })
                             }
-                            className="w-9 h-9 rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 flex items-center justify-center font-bold text-sm shrink-0 transition-colors"
+                            className="w-10 h-10 min-h-[44px] min-w-[44px] rounded-lg bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 flex items-center justify-center font-bold text-sm shrink-0 transition-colors"
                             aria-label="Aumentar idade"
                           >
                             <Plus className="w-3.5 h-3.5" />
@@ -644,7 +703,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                         </div>
                       </div>
 
-                      <div className="sm:col-span-2 bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-between sm:flex-col sm:items-start">
+                      <div className="col-span-1 sm:col-span-2 md:col-span-2 bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-between md:flex-col md:items-start">
                         <span className="text-[10px] text-slate-400 uppercase font-semibold">Faixa ANS</span>
                         <span className="text-xs font-semibold text-slate-800">
                           {getAnsAgeBracketLabel(bracket)}
@@ -669,11 +728,11 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
             </div>
 
             {/* Step Navigation to Next Tab */}
-            <div className="pt-2 flex items-center justify-between gap-2">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2.5 w-full">
               <button
                 type="button"
                 onClick={() => setActiveTab('profile')}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-colors min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-colors min-h-[44px]"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Voltar</span>
@@ -681,7 +740,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('coverage')}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors min-h-[44px]"
               >
                 <span>Avançar para Cobertura</span>
                 <ArrowRight className="w-4 h-4" />
@@ -809,11 +868,11 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
             </div>
 
             {/* Step Navigation to Next Tab */}
-            <div className="pt-2 flex items-center justify-between gap-2">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2.5 w-full">
               <button
                 type="button"
                 onClick={() => setActiveTab('beneficiaries')}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-colors min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-colors min-h-[44px]"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Voltar</span>
@@ -821,7 +880,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('filters')}
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors min-h-[44px]"
               >
                 <span>Avançar para Filtros</span>
                 <ArrowRight className="w-4 h-4" />
@@ -834,10 +893,10 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
         {activeTab === 'filters' && (
           <div className="space-y-6">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2 text-center sm:text-left">
                 Filtrar por Hospitais de Excelência Desejados (Opcional)
               </label>
-              <p className="text-xs text-slate-500 mb-3">
+              <p className="text-xs text-slate-500 mb-3 text-center sm:text-left">
                 Selecione os hospitais que você faz questão que estejam credenciados:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
@@ -871,13 +930,13 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-slate-100">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2 text-center sm:text-left">
                   Filtrar por Operadora
                 </label>
                 <select
                   value={currentInput.operatorFilter || 'all'}
                   onChange={(e) => updateField('operatorFilter', e.target.value)}
-                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 min-h-[44px]"
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 min-h-[44px]"
                 >
                   <option value="all">Todas as Operadoras</option>
                   <option value="bradesco">Bradesco Saúde</option>
@@ -892,7 +951,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
+                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2 text-center sm:text-left">
                   Teto Máximo Mensal Desejado (R$)
                 </label>
                 <input
@@ -905,17 +964,17 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
                       e.target.value ? parseFloat(e.target.value) : undefined
                     )
                   }
-                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono min-h-[44px]"
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono min-h-[44px] text-center sm:text-left"
                 />
               </div>
             </div>
 
             {/* Step Navigation to Simulate */}
-            <div className="pt-2 flex items-center justify-between gap-2">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2.5 w-full">
               <button
                 type="button"
                 onClick={() => setActiveTab('coverage')}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-colors min-h-[44px]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl transition-colors min-h-[44px]"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Voltar</span>
@@ -923,7 +982,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
               <button
                 type="button"
                 onClick={onSimulate}
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors min-h-[44px] active:scale-[0.99]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs rounded-xl shadow-xs transition-colors min-h-[44px] active:scale-[0.99]"
               >
                 <span>Ver Planos & Cotação</span>
                 <ArrowRight className="w-4 h-4" />
@@ -933,8 +992,8 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
         )}
       </div>
 
-      {/* Footer action bar */}
-      <div className="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      {/* Footer action bar - centered on mobile */}
+      <div className="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
         <div className="text-xs text-slate-500 text-center sm:text-left">
           Total: <strong className="text-slate-900">{currentInput.beneficiaries.length} vidas</strong> em{' '}
           <strong className="text-slate-900">{currentInput.state}</strong> (

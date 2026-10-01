@@ -50,17 +50,17 @@ export const FaqSection: React.FC = () => {
   ];
 
   return (
-    <section id="faq" className="py-16 bg-white border-t border-slate-200">
+    <section id="faq" className="py-16 bg-white border-t border-slate-200 w-full max-w-full overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         {/* Section Header */}
         <div className="text-center space-y-2">
           <div className="text-xs font-semibold text-teal-700 uppercase tracking-wider">
             Tire Suas Dúvidas
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-bold font-display text-slate-900 tracking-tight text-balance">
             Regras da ANS, Carências e Condições de Mercado
           </h2>
-          <p className="text-sm text-slate-500 max-w-xl mx-auto">
+          <p className="text-sm text-slate-500 max-w-xl mx-auto text-pretty">
             Entenda como funciona a precificação, as garantias legais da Lei 9.656/98 e como economizar com segurança.
           </p>
         </div>
@@ -76,21 +76,21 @@ export const FaqSection: React.FC = () => {
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}
-                  className="w-full p-4 sm:p-5 text-left bg-white hover:bg-slate-50 flex items-center justify-between gap-4 transition-colors"
+                  className="w-full p-4 sm:p-5 text-left bg-white hover:bg-slate-50 flex items-center justify-between gap-4 transition-colors min-h-[56px]"
                 >
                   <div className="space-y-1">
                     <span className="text-[10px] font-semibold text-teal-700 uppercase tracking-wider">
                       {faq.category}
                     </span>
-                    <h3 className="text-sm font-bold text-slate-900">{faq.question}</h3>
+                    <h3 className="text-sm font-bold text-slate-900 text-balance">{faq.question}</h3>
                   </div>
-                  <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center shrink-0 text-slate-500">
+                  <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center shrink-0 text-slate-500">
                     {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
 
                 {isOpen && (
-                  <div className="p-4 sm:p-5 pt-0 bg-white text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100">
+                  <div className="p-4 sm:p-5 pt-3 bg-white text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 text-pretty">
                     {faq.answer}
                   </div>
                 )}

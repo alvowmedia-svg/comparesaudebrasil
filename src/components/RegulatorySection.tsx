@@ -8,7 +8,7 @@ export const RegulatorySection: React.FC = () => {
   const estimatedTaxReturn = calculateEstimatedTaxSavings(annualSpend, 27.5);
 
   return (
-    <section id="regras-ans" className="py-16 bg-white border-t border-slate-200">
+    <section id="regras-ans" className="py-16 bg-white border-t border-slate-200 w-full max-w-full overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Title */}
         <div className="max-w-3xl">
@@ -97,16 +97,16 @@ export const RegulatorySection: React.FC = () => {
                 <Calculator className="w-4 h-4 text-teal-400" />
                 <span>Simulador de Benefício Fiscal IRPF</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
+              <h3 className="text-xl sm:text-2xl font-bold font-display text-white text-balance">
                 100% dos gastos com plano de saúde são dedutíveis no Imposto de Renda.
               </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed text-pretty">
                 Ao contrário de educação (que tem teto máximo), a Receita Federal permite deduzir integralmente todas as despesas médicas e mensalidades do plano para você e dependentes legais na declaração completa.
               </p>
 
               {/* Slider */}
               <div className="pt-4 space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-300">
+                <div className="flex items-center justify-between text-xs text-slate-300 flex-wrap gap-1">
                   <span>Gasto Anual Estimado com Plano de Saúde:</span>
                   <span className="font-mono font-bold text-white text-base">
                     R$ {annualSpend.toLocaleString('pt-BR')} / ano
@@ -119,12 +119,12 @@ export const RegulatorySection: React.FC = () => {
                   step="1000"
                   value={annualSpend}
                   onChange={(e) => setAnnualSpend(Number(e.target.value))}
-                  className="w-full accent-teal-500 cursor-pointer"
+                  className="w-full accent-teal-500 cursor-pointer h-3 min-h-[40px]"
                 />
-                <div className="flex justify-between text-[10px] text-slate-500 font-mono">
-                  <span>R$ 3.000 (R$ 250/mês)</span>
-                  <span>R$ 20.000 (R$ 1.660/mês)</span>
-                  <span>R$ 40.000 (R$ 3.330/mês)</span>
+                <div className="flex justify-between text-[10px] text-slate-500 font-mono flex-wrap gap-1">
+                  <span>R$ 3.000 (R$ 250/m)</span>
+                  <span className="hidden sm:inline">R$ 20.000 (R$ 1.660/m)</span>
+                  <span>R$ 40.000 (R$ 3.330/m)</span>
                 </div>
               </div>
             </div>
