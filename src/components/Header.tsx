@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ onStartQuote, onOpenAdvisor, act
         </nav>
 
         {/* Zone 3: Actions + Mobile Menu button */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <div className="flex flex-wrap items-center justify-end gap-1.5 sm:gap-3 shrink-0">
           <button
             onClick={onOpenAdvisor}
             className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs font-semibold text-teal-800 bg-teal-50 hover:bg-teal-100 rounded-lg transition-colors whitespace-nowrap border border-teal-200 min-h-[38px]"

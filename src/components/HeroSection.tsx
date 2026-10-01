@@ -25,34 +25,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span className="truncate">Estimativas Atualizadas · Tabelas de Mercado 2026 ANS</span>
             </div>
 
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight font-display text-white leading-tight max-w-2xl">
+            <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight font-display text-white leading-tight text-balance max-w-2xl">
               Compare planos de saúde com estimativas reais para o seu perfil.
             </h1>
 
-            <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-xl leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg text-slate-300 max-w-xl leading-relaxed text-pretty">
               Algoritmo de cálculo com as 10 faixas etárias oficiais da ANS, desconto empresarial para MEI/PME,
-              comparação de rede hospitalar e simulação transparente vida a vida.
+              comparação de rede flexível e simulação transparente vida a vida.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-1 sm:pt-2">
+            <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-6 pt-1 sm:pt-2">
               <button
                 onClick={onStartSimulation}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-teal-600 hover:bg-teal-500 rounded-xl transition-colors whitespace-nowrap shadow-lg shadow-teal-900/30 min-h-[48px] active:scale-[0.99]"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white bg-teal-600 hover:bg-teal-500 rounded-xl transition-colors whitespace-nowrap shadow-lg shadow-teal-900/30 min-h-[48px] active:scale-[0.99]"
               >
                 <span>Simular Cotação Agora</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={onExploreHospitals}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-700 hover:text-white rounded-xl transition-colors whitespace-nowrap border border-slate-700 min-h-[48px] active:scale-[0.99]"
+                className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-slate-200 bg-slate-800/80 hover:bg-slate-700 hover:text-white rounded-xl transition-colors whitespace-nowrap border border-slate-700 min-h-[48px] active:scale-[0.99]"
               >
                 <span>Ver Hospitais Credenciados</span>
               </button>
             </div>
 
             {/* Trust points - responsive stack on mobile */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 pt-4 sm:pt-6 border-t border-slate-800 text-xs text-slate-300">
+            <div className="flex flex-wrap justify-center md:justify-start gap-2 sm:gap-3 pt-4 sm:pt-6 border-t border-slate-800 text-xs text-slate-300">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>10 Faixas ANS</span>
@@ -61,7 +61,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <Building2 className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>MEI / PME OFF</span>
               </div>
-              <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
+              <div className="flex items-center gap-2">
                 <FileCheck2 className="w-4 h-4 text-teal-400 shrink-0" />
                 <span>100% Dedutível IRPF</span>
               </div>
@@ -69,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Right Column: Hero Visual Asset */}
-          <div className="lg:col-span-5 relative mt-2 lg:mt-0">
+          <div className="lg:col-span-5 relative mt-4 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-800">
               <img
                 src={heroImage}

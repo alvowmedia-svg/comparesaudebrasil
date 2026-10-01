@@ -112,8 +112,8 @@ export const LocationDetectorBar: React.FC<LocationDetectorBarProps> = ({
   const currentStateObj = BRAZILIAN_STATES.find((s) => s.uf === currentInput.state);
 
   return (
-    <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-900 text-white rounded-2xl p-3.5 sm:p-5 border border-teal-800/60 shadow-md">
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3.5 sm:gap-5">
+    <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-900 text-white rounded-2xl p-4 sm:p-5 border border-teal-800/60 shadow-md w-full max-w-md mx-auto md:max-w-none">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-5">
         {/* Left: Current Active Location */}
         <div className="space-y-1">
           <div className="flex items-center gap-2 text-xs font-semibold text-teal-300">
@@ -151,7 +151,7 @@ export const LocationDetectorBar: React.FC<LocationDetectorBarProps> = ({
         </div>
 
         {/* Right: GPS, CEP and Manual Actions - Full Width Grid on Mobile */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full lg:w-auto">
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 w-full md:w-auto">
           {/* 1-Click GPS button */}
           <button
             onClick={handleDetectGps}
@@ -232,7 +232,7 @@ export const LocationDetectorBar: React.FC<LocationDetectorBarProps> = ({
           <span className="text-[11px] text-slate-400 block font-medium">
             Selecione o seu Estado para calibrar a cotação regional:
           </span>
-          <div className="grid grid-cols-4 sm:flex sm:flex-wrap gap-1.5 text-xs max-h-52 overflow-y-auto p-1">
+          <div className="flex flex-wrap justify-center sm:justify-start gap-1.5 text-xs max-h-52 overflow-y-auto p-1">
             {BRAZILIAN_STATES.map((st) => (
               <button
                 key={st.uf}

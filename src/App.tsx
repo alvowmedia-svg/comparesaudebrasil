@@ -165,7 +165,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans w-full max-w-full overflow-x-hidden">
       {/* 3-Zone Clean Header */}
       <Header
         onStartQuote={() => scrollTo('simulador')}
@@ -180,7 +180,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-6 sm:py-10 pb-28 md:pb-10 space-y-8 sm:space-y-10">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-28 md:pb-10 space-y-8 sm:space-y-10 overflow-x-hidden">
         {/* Dynamic Location Precision Bar */}
         <LocationDetectorBar
           currentInput={quoteInput}
