@@ -210,21 +210,21 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
   };
 
   return (
-    <div id="simulador" className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div id="simulador" className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden w-full max-w-full box-border min-w-0">
       {/* Header bar of wizard */}
       <div className="p-3.5 sm:p-6 border-b border-slate-100 bg-slate-50/50">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 sm:gap-4">
-          <div>
+          <div className="flex flex-col min-w-0 w-full max-w-full">
             <h2 className="text-lg sm:text-xl font-bold font-display text-slate-900">
               Configurador Condicional de Cotação
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+            <p className="text-xs sm:text-sm text-slate-500 mt-0.5 break-words">
               Personalize a modalidade, as vidas e a cobertura para calcular a estimativa média de mercado.
             </p>
           </div>
 
           {/* Quick presets buttons - smooth horizontal touch scroll on mobile */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1 -mx-1 px-1">
+          <div className="flex flex-wrap items-center gap-2 py-1 -mx-1 px-1 w-full max-w-full min-w-0">
             <span className="text-slate-400 font-medium text-[11px] whitespace-nowrap shrink-0">Exemplos:</span>
             <button
               onClick={() => loadPreset('jovem')}
@@ -254,7 +254,7 @@ export const QuoteWizard: React.FC<QuoteWizardProps> = ({
         </div>
 
         {/* Wizard navigation segmented tabs */}
-        <div className="flex items-center gap-1 mt-4 sm:mt-6 p-1 bg-slate-200/70 rounded-xl overflow-x-auto text-xs font-semibold no-scrollbar">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-1 mt-4 sm:mt-6 p-1 bg-slate-200/70 rounded-xl text-xs font-semibold w-full max-w-full min-w-0">
           <button
             onClick={() => setActiveTab('profile')}
             className={`flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg transition-colors whitespace-nowrap shrink-0 min-h-[40px] flex-1 sm:flex-initial ${

@@ -165,7 +165,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans w-full max-w-[100vw] overflow-x-hidden min-w-0">
       {/* 3-Zone Clean Header */}
       <Header
         onStartQuote={() => scrollTo('simulador')}
@@ -180,7 +180,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-28 md:pb-10 space-y-8 sm:space-y-10 overflow-x-hidden">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 pb-28 md:pb-8 space-y-8 sm:space-y-10 overflow-x-hidden min-w-0 box-border">
         {/* Dynamic Location Precision Bar */}
         <LocationDetectorBar
           currentInput={quoteInput}
@@ -197,7 +197,7 @@ export default function App() {
         {/* COMPARISON RESULTS SECTION */}
         <section id="comparador" className="space-y-6 pt-4">
           {/* Results Summary Bar */}
-          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-4 min-w-0 w-full max-w-full box-border">
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-lg sm:text-xl font-bold font-display text-slate-900">
@@ -315,7 +315,7 @@ export default function App() {
 
           {/* Grid of Calculated Plans */}
           {displayedQuotes.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-w-0 w-full max-w-full">
               {displayedQuotes.map((quote) => (
                 <PlanCard
                   key={quote.planId}

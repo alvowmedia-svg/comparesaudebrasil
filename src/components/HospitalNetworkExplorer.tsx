@@ -37,8 +37,8 @@ export const HospitalNetworkExplorer: React.FC<HospitalNetworkExplorerProps> = (
   });
 
   return (
-    <section id="hospitais" className="py-16 bg-slate-50 border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <section id="hospitais" className="py-16 bg-slate-50 border-t border-slate-200 w-full max-w-full box-border min-w-0 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 w-full max-w-full min-w-0 box-border">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="space-y-2 max-w-2xl">

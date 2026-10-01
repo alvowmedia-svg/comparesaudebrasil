@@ -32,7 +32,7 @@ export const PlanCard: React.FC<PlanCardProps> = ({
 
   return (
     <div
-      className={`rounded-2xl border transition-all duration-200 bg-white overflow-hidden flex flex-col justify-between ${
+      className={`rounded-2xl border transition-all duration-200 bg-white overflow-hidden flex flex-col justify-between w-full max-w-full box-border min-w-0 ${
         isSelectedForComparison
           ? 'border-teal-600 ring-2 ring-teal-500/20 shadow-md'
           : 'border-slate-200 hover:border-slate-300 shadow-sm'

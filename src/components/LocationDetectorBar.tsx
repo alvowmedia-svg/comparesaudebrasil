@@ -112,7 +112,7 @@ export const LocationDetectorBar: React.FC<LocationDetectorBarProps> = ({
   const currentStateObj = BRAZILIAN_STATES.find((s) => s.uf === currentInput.state);
 
   return (
-    <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-900 text-white rounded-2xl p-4 sm:p-5 border border-teal-800/60 shadow-md w-full max-w-md mx-auto md:max-w-none">
+    <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-slate-900 text-white rounded-2xl p-4 sm:p-5 border border-teal-800/60 shadow-md w-full max-w-full box-border min-w-0 mx-auto md:max-w-none">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-5">
         {/* Left: Current Active Location */}
         <div className="space-y-1">

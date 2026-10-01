@@ -69,7 +69,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </div>
 
           {/* Right Column: Hero Visual Asset */}
-          <div className="lg:col-span-5 relative mt-4 lg:mt-0 w-full max-w-md mx-auto lg:max-w-none">
+          <div className="lg:col-span-5 relative mt-4 lg:mt-0 w-full max-w-full box-border min-w-0 mx-auto lg:max-w-none">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-slate-800 bg-slate-800">
               <img
                 src={heroImage}
